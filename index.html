@@ -193,16 +193,18 @@
   }
 
   /* Screenshots */
-  .screenshots { background: var(--white); overflow: hidden; }
+  .screenshots { background: var(--white); }
   .screenshots-track {
     display: flex;
     gap: 24px;
-    padding: 20px 0;
+    padding: 20px 0 40px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    cursor: grab;
   }
+  .screenshots-track:active { cursor: grabbing; }
   .screenshots-track::-webkit-scrollbar { display: none; }
   .screenshot-item {
     flex: 0 0 auto;
@@ -607,6 +609,23 @@
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Drag to scroll for screenshots
+  const track = document.querySelector('.screenshots-track');
+  let isDown = false, startX, scrollLeft;
+  track.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+  track.addEventListener('mouseleave', () => { isDown = false; });
+  track.addEventListener('mouseup', () => { isDown = false; });
+  track.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX) * 1.5;
   });
 </script>
 </body>
