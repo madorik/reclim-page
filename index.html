@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>리클림 - 클라이밍 기록의 모든 것</title>
+<meta name="description" content="실내 클라이밍 영상과 기록을 한눈에 관리하세요. 촬영, 기록, 영상 편집, 통계까지 리클림 하나로.">
+<meta property="og:title" content="리클림 - 클라이밍 기록의 모든 것">
+<meta property="og:description" content="실내 클라이밍 영상과 기록을 한눈에 관리하세요. 촬영, 기록, 영상 편집, 통계까지 리클림 하나로.">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --primary: #E94560;
+    --primary-dark: #C73550;
+    --navy: #1A1A2E;
+    --navy-light: #16213E;
+    --surface: #F5F3F0;
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --white: #ffffff;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 0 24px;
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-size: 1.3em;
+    font-weight: 800;
+    color: var(--navy);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-logo img {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+  .nav-logo span { color: var(--primary); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--primary); }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, #0F3460 100%);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 80%;
+    height: 200%;
+    background: radial-gradient(ellipse, rgba(233,69,96,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 720px; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(233,69,96,0.2);
+    color: var(--primary);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-bottom: 24px;
+    border: 1px solid rgba(233,69,96,0.3);
+  }
+  .hero h1 {
+    font-size: clamp(2.5em, 6vw, 4em);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--primary); }
+  .hero p {
+    font-size: 1.2em;
+    color: rgba(255,255,255,0.7);
+    max-width: 560px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+  }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 1em;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: var(--white);
+  }
+  .btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(233,69,96,0.4);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+  .btn-outline:hover {
+    border-color: var(--white);
+    transform: translateY(-2px);
+  }
+  .btn img.store-badge {
+    height: 44px;
+    border-radius: 8px;
+  }
+
+  /* Section common */
+  section {
+    padding: 100px 24px;
+  }
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    display: inline-block;
+    background: rgba(233,69,96,0.1);
+    color: var(--primary);
+    padding: 4px 14px;
+    border-radius: 16px;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(1.8em, 4vw, 2.5em);
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--navy);
+  }
+  .section-desc {
+    font-size: 1.1em;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin-bottom: 60px;
+  }
+
+  /* Features */
+  .features { background: var(--surface); }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .feature-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  .feature-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+  }
+  .feature-icon.red { background: rgba(233,69,96,0.1); }
+  .feature-icon.blue { background: rgba(15,52,96,0.1); }
+  .feature-icon.green { background: rgba(46,196,182,0.1); }
+  .feature-icon.purple { background: rgba(128,90,213,0.1); }
+  .feature-icon.orange { background: rgba(255,159,67,0.1); }
+  .feature-icon.teal { background: rgba(0,206,209,0.1); }
+  .feature-card h3 {
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--navy);
+  }
+  .feature-card p {
+    color: var(--text-muted);
+    font-size: 0.95em;
+    line-height: 1.7;
+  }
+
+  /* How it works */
+  .how-it-works { background: var(--white); }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    counter-reset: step;
+  }
+  .step {
+    text-align: center;
+    position: relative;
+  }
+  .step::before {
+    counter-increment: step;
+    content: counter(step);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin: 0 auto 20px;
+  }
+  .step h3 {
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--navy);
+  }
+  .step p {
+    font-size: 0.93em;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* Target */
+  .target { background: var(--navy); color: var(--white); }
+  .target .section-title { color: var(--white); }
+  .target .section-desc { color: rgba(255,255,255,0.6); }
+  .target-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .target-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 32px;
+    transition: background 0.3s;
+  }
+  .target-card:hover { background: rgba(255,255,255,0.1); }
+  .target-card .icon {
+    font-size: 2em;
+    margin-bottom: 16px;
+  }
+  .target-card h3 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .target-card p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.93em;
+  }
+
+  /* CTA */
+  .cta {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 80px 24px;
+  }
+  .cta h2 {
+    font-size: clamp(1.5em, 3vw, 2em);
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .cta p {
+    font-size: 1.1em;
+    opacity: 0.9;
+    margin-bottom: 32px;
+  }
+  .cta .btn-outline {
+    border-color: rgba(255,255,255,0.5);
+  }
+  .cta .btn-outline:hover {
+    background: var(--white);
+    color: var(--primary);
+    border-color: var(--white);
+  }
+
+  /* Footer */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy { font-size: 0.85em; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero { padding: 100px 20px 60px; min-height: auto; }
+    section { padding: 60px 20px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; gap: 24px; }
+    .target-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .steps { grid-template-columns: 1fr; }
+    .hero-buttons { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="../assets/images/app_icon.png" alt="리클림" onerror="this.style.display='none'">
+      리<span>클림</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">주요 기능</a></li>
+      <li><a href="#how">이용 방법</a></li>
+      <li><a href="#target">이런 분께</a></li>
+      <li><a href="privacy-policy.html">개인정보처리방침</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Indoor Climbing Tracker</div>
+    <h1>클라이밍 기록의<br><span>모든 것</span>, 리클림</h1>
+    <p>영상 촬영부터 기록, 편집, 통계까지.<br>나의 클라이밍 여정을 한 곳에서 관리하세요.</p>
+    <div class="hero-buttons">
+      <a href="https://play.google.com/store/apps/details?id=com.mg.cling" class="btn btn-primary" target="_blank" rel="noopener">
+        Google Play에서 다운로드
+      </a>
+      <a href="https://apps.apple.com/app/id6744227498" class="btn btn-outline" target="_blank" rel="noopener">
+        App Store에서 다운로드
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features" id="features">
+  <div class="section-inner">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">리클림이 특별한 이유</h2>
+    <p class="section-desc">클라이머에게 필요한 기능만 모았습니다. 복잡한 건 빼고, 진짜 필요한 것만.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon red">&#127909;</div>
+        <h3>영상 촬영 & 편집</h3>
+        <p>앱에서 바로 클라이밍 영상을 촬영하고, 필요한 구간만 트리밍하거나 속도를 조절해 저장하세요. 갤러리 영상 불러오기도 지원합니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon blue">&#128221;</div>
+        <h3>체계적인 기록 관리</h3>
+        <p>등급, 난이도 색상, 완등/실패 여부를 매 시도마다 기록하세요. 태그를 추가해 나만의 방식으로 분류할 수 있습니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon green">&#128197;</div>
+        <h3>캘린더 뷰</h3>
+        <p>날짜별로 클라이밍 기록을 한눈에 확인하세요. 어떤 날에 얼마나 등반했는지 직관적으로 파악할 수 있습니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon purple">&#128205;</div>
+        <h3>클라이밍장 관리</h3>
+        <p>자주 가는 클라이밍장을 등록하고 지도에서 확인하세요. 기록마다 어떤 장소에서 등반했는지 남길 수 있습니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon orange">&#128200;</div>
+        <h3>통계 & 분석</h3>
+        <p>등급별, 기간별 클라이밍 통계를 차트로 확인하세요. 나의 실력 변화를 한눈에 파악할 수 있습니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon teal">&#9729;&#65039;</div>
+        <h3>클라우드 백업</h3>
+        <p>소중한 클라이밍 영상과 기록을 클라우드에 안전하게 백업하세요. 기기를 바꿔도 데이터가 유지됩니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="how-it-works" id="how">
+  <div class="section-inner">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">간단한 사용법</h2>
+    <p class="section-desc">복잡한 설정 없이, 3단계로 시작하세요.</p>
+    <div class="steps">
+      <div class="step">
+        <h3>촬영하기</h3>
+        <p>클라이밍하는 모습을 앱에서 바로 촬영하거나, 갤러리에서 기존 영상을 불러오세요.</p>
+      </div>
+      <div class="step">
+        <h3>기록하기</h3>
+        <p>등급, 색상, 완등 여부를 선택하고 태그를 추가해 한 번의 시도를 완전히 기록하세요.</p>
+      </div>
+      <div class="step">
+        <h3>돌아보기</h3>
+        <p>캘린더와 통계로 나의 성장 과정을 확인하고, 영상으로 폼을 점검하세요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Target audience -->
+<section class="target" id="target">
+  <div class="section-inner">
+    <div class="section-label">For Climbers</div>
+    <h2 class="section-title">이런 분께 추천합니다</h2>
+    <p class="section-desc">볼더링을 더 재미있고 체계적으로 즐기고 싶은 모든 클라이머를 위해.</p>
+    <div class="target-grid">
+      <div class="target-card">
+        <div class="icon">&#127939;</div>
+        <h3>실력 향상을 원하는 클라이머</h3>
+        <p>영상으로 자세를 점검하고, 통계로 성장을 확인하며 체계적으로 실력을 키워보세요.</p>
+      </div>
+      <div class="target-card">
+        <div class="icon">&#128218;</div>
+        <h3>기록을 체계적으로 관리하고 싶은 분</h3>
+        <p>매 세션마다 흩어지는 기록을 한 곳에서 깔끔하게 정리하고 돌아보세요.</p>
+      </div>
+      <div class="target-card">
+        <div class="icon">&#128170;</div>
+        <h3>성장 과정을 되돌아보고 싶은 분</h3>
+        <p>처음 도전했던 루트부터 지금까지, 나의 클라이밍 여정을 한눈에 확인하세요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>지금 리클림을 시작하세요</h2>
+  <p>무료로 다운로드하고 첫 번째 클라이밍을 기록해 보세요.</p>
+  <div class="hero-buttons">
+    <a href="https://play.google.com/store/apps/details?id=com.mg.cling" class="btn btn-outline" target="_blank" rel="noopener">
+      Google Play
+    </a>
+    <a href="https://apps.apple.com/app/id6744227498" class="btn btn-outline" target="_blank" rel="noopener">
+      App Store
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="privacy-policy.html">개인정보처리방침</a>
+      <a href="mailto:wandeung.help@gmail.com">문의하기</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 리클림. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+</script>
+</body>
+</html>
