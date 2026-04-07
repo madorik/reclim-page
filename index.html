@@ -70,7 +70,6 @@
     height: 32px;
     border-radius: 8px;
   }
-  .nav-logo span { color: var(--primary); }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a {
     text-decoration: none;
@@ -161,10 +160,6 @@
     border-color: var(--white);
     transform: translateY(-2px);
   }
-  .btn img.store-badge {
-    height: 44px;
-    border-radius: 8px;
-  }
 
   /* Section common */
   section {
@@ -195,6 +190,40 @@
     color: var(--text-muted);
     max-width: 600px;
     margin-bottom: 60px;
+  }
+
+  /* Screenshots */
+  .screenshots { background: var(--white); overflow: hidden; }
+  .screenshots-track {
+    display: flex;
+    gap: 24px;
+    padding: 20px 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .screenshots-track::-webkit-scrollbar { display: none; }
+  .screenshot-item {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    text-align: center;
+  }
+  .screenshot-item img {
+    width: 260px;
+    height: auto;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+  }
+  .screenshot-item img:hover {
+    transform: scale(1.03);
+  }
+  .screenshot-item .caption {
+    margin-top: 16px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--text-muted);
   }
 
   /* Features */
@@ -374,11 +403,13 @@
     .features-grid { grid-template-columns: 1fr; }
     .steps { grid-template-columns: 1fr 1fr; gap: 24px; }
     .target-grid { grid-template-columns: 1fr; }
+    .screenshot-item img { width: 200px; }
   }
 
   @media (max-width: 480px) {
     .steps { grid-template-columns: 1fr; }
     .hero-buttons { flex-direction: column; align-items: center; }
+    .screenshot-item img { width: 180px; }
   }
 </style>
 </head>
@@ -389,6 +420,7 @@
   <div class="nav-inner">
     <a href="#" class="nav-logo"><img src="app_icon.png" alt="리클림" onerror="this.style.display='none'">리클림</a>
     <ul class="nav-links">
+      <li><a href="#screenshots">앱 미리보기</a></li>
       <li><a href="#features">주요 기능</a></li>
       <li><a href="#how">이용 방법</a></li>
       <li><a href="#target">이런 분께</a></li>
@@ -407,10 +439,51 @@
       <a href="https://play.google.com/store/apps/details?id=com.mg.cling" class="btn btn-primary" target="_blank" rel="noopener">
         Google Play에서 다운로드
       </a>
-      <a href="https://teams.microsoft.com/l/message/19:0e4ede4e3b794c3691a74b0ebbb9f351@thread.v2/1775524619564?context=%7B%22contextType%22%3A%22chat%22%7D" class="btn btn-outline" target="_blank" rel="noopener">
+      <a href="https://apps.apple.com/us/app/%EB%A6%AC%ED%81%B4%EB%A6%BC/id6760994195" class="btn btn-outline" target="_blank" rel="noopener">
         App Store에서 다운로드
       </a>
     </div>
+  </div>
+</section>
+
+<!-- Screenshots -->
+<section class="screenshots" id="screenshots">
+  <div class="section-inner">
+    <div class="section-label">Preview</div>
+    <h2 class="section-title">앱 미리보기</h2>
+    <p class="section-desc">리클림의 주요 화면을 확인해보세요.</p>
+  </div>
+  <div class="screenshots-track">
+    <div style="min-width: 24px"></div>
+    <div class="screenshot-item">
+      <img src="screenshots/home.png" alt="홈 화면">
+      <div class="caption">홈 대시보드</div>
+    </div>
+    <div class="screenshot-item">
+      <img src="screenshots/camera.png" alt="촬영 화면">
+      <div class="caption">영상 촬영</div>
+    </div>
+    <div class="screenshot-item">
+      <img src="screenshots/editor.png" alt="영상 편집">
+      <div class="caption">영상 편집</div>
+    </div>
+    <div class="screenshot-item">
+      <img src="screenshots/complete.png" alt="완등 축하">
+      <div class="caption">완등 축하</div>
+    </div>
+    <div class="screenshot-item">
+      <img src="screenshots/compare.png" alt="영상 비교">
+      <div class="caption">영상 비교</div>
+    </div>
+    <div class="screenshot-item">
+      <img src="screenshots/gym.png" alt="암장 상세">
+      <div class="caption">암장 상세</div>
+    </div>
+    <div class="screenshot-item">
+      <img src="screenshots/stats.png" alt="암장 통계">
+      <div class="caption">암장 통계</div>
+    </div>
+    <div style="min-width: 24px"></div>
   </div>
 </section>
 
@@ -512,7 +585,7 @@
     <a href="https://play.google.com/store/apps/details?id=com.mg.cling" class="btn btn-outline" target="_blank" rel="noopener">
       Google Play
     </a>
-    <a href="https://teams.microsoft.com/l/message/19:0e4ede4e3b794c3691a74b0ebbb9f351@thread.v2/1775524619564?context=%7B%22contextType%22%3A%22chat%22%7D" class="btn btn-outline" target="_blank" rel="noopener">
+    <a href="https://apps.apple.com/us/app/%EB%A6%AC%ED%81%B4%EB%A6%BC/id6760994195" class="btn btn-outline" target="_blank" rel="noopener">
       App Store
     </a>
   </div>
