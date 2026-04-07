@@ -192,23 +192,26 @@
     margin-bottom: 60px;
   }
 
-  /* Screenshots */
-  .screenshots { background: var(--white); }
-  .screenshots-track {
+  /* Screenshots - infinite marquee */
+  .screenshots { background: var(--white); overflow: hidden; }
+  .screenshots-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 40s linear infinite;
+    padding: 20px 0 40px;
+  }
+  .screenshots-marquee:hover { animation-play-state: paused; }
+  .screenshots-set {
     display: flex;
     gap: 24px;
-    padding: 20px 0 40px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    cursor: grab;
+    padding-right: 24px;
   }
-  .screenshots-track:active { cursor: grabbing; }
-  .screenshots-track::-webkit-scrollbar { display: none; }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
   .screenshot-item {
     flex: 0 0 auto;
-    scroll-snap-align: center;
     text-align: center;
   }
   .screenshot-item img {
@@ -219,7 +222,7 @@
     transition: transform 0.3s;
   }
   .screenshot-item img:hover {
-    transform: scale(1.03);
+    transform: scale(1.05);
   }
   .screenshot-item .caption {
     margin-top: 16px;
@@ -455,37 +458,67 @@
     <h2 class="section-title">앱 미리보기</h2>
     <p class="section-desc">리클림의 주요 화면을 확인해보세요.</p>
   </div>
-  <div class="screenshots-track">
-    <div style="min-width: 24px"></div>
-    <div class="screenshot-item">
-      <img src="screenshots/home.png" alt="홈 화면">
-      <div class="caption">홈 대시보드</div>
+  <div class="screenshots-marquee">
+    <div class="screenshots-set">
+      <div class="screenshot-item">
+        <img src="screenshots/home.png" alt="홈 화면">
+        <div class="caption">홈 대시보드</div>
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/camera.png" alt="촬영 화면">
+        <div class="caption">영상 촬영</div>
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/editor.png" alt="영상 편집">
+        <div class="caption">영상 편집</div>
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/complete.png" alt="완등 축하">
+        <div class="caption">완등 축하</div>
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/compare.png" alt="영상 비교">
+        <div class="caption">영상 비교</div>
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/gym.png" alt="암장 상세">
+        <div class="caption">암장 상세</div>
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/stats.png" alt="암장 통계">
+        <div class="caption">암장 통계</div>
+      </div>
     </div>
-    <div class="screenshot-item">
-      <img src="screenshots/camera.png" alt="촬영 화면">
-      <div class="caption">영상 촬영</div>
+    <div class="screenshots-set" aria-hidden="true">
+      <div class="screenshot-item">
+        <img src="screenshots/home.png" alt="">
+        <div class="caption">홈 대시보드</div>
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/camera.png" alt="">
+        <div class="caption">영상 촬영</div>
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/editor.png" alt="">
+        <div class="caption">영상 편집</div>
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/complete.png" alt="">
+        <div class="caption">완등 축하</div>
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/compare.png" alt="">
+        <div class="caption">영상 비교</div>
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/gym.png" alt="">
+        <div class="caption">암장 상세</div>
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/stats.png" alt="">
+        <div class="caption">암장 통계</div>
+      </div>
     </div>
-    <div class="screenshot-item">
-      <img src="screenshots/editor.png" alt="영상 편집">
-      <div class="caption">영상 편집</div>
-    </div>
-    <div class="screenshot-item">
-      <img src="screenshots/complete.png" alt="완등 축하">
-      <div class="caption">완등 축하</div>
-    </div>
-    <div class="screenshot-item">
-      <img src="screenshots/compare.png" alt="영상 비교">
-      <div class="caption">영상 비교</div>
-    </div>
-    <div class="screenshot-item">
-      <img src="screenshots/gym.png" alt="암장 상세">
-      <div class="caption">암장 상세</div>
-    </div>
-    <div class="screenshot-item">
-      <img src="screenshots/stats.png" alt="암장 통계">
-      <div class="caption">암장 통계</div>
-    </div>
-    <div style="min-width: 24px"></div>
   </div>
 </section>
 
@@ -611,22 +644,6 @@
     nav.classList.toggle('scrolled', window.scrollY > 20);
   });
 
-  // Drag to scroll for screenshots
-  const track = document.querySelector('.screenshots-track');
-  let isDown = false, startX, scrollLeft;
-  track.addEventListener('mousedown', (e) => {
-    isDown = true;
-    startX = e.pageX - track.offsetLeft;
-    scrollLeft = track.scrollLeft;
-  });
-  track.addEventListener('mouseleave', () => { isDown = false; });
-  track.addEventListener('mouseup', () => { isDown = false; });
-  track.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - track.offsetLeft;
-    track.scrollLeft = scrollLeft - (x - startX) * 1.5;
-  });
 </script>
 </body>
 </html>
