@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>리클림 - 클라이밍 기록의 모든 것</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta name="description" content="실내 클라이밍 영상과 기록을 한눈에 관리하세요. 촬영, 기록, 영상 편집, 통계까지 리클림 하나로.">
 <meta property="og:title" content="리클림 - 클라이밍 기록의 모든 것">
 <meta property="og:description" content="실내 클라이밍 영상과 기록을 한눈에 관리하세요. 촬영, 기록, 영상 편집, 통계까지 리클림 하나로.">
@@ -63,13 +67,14 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
   }
   .nav-logo img {
     width: 32px;
     height: 32px;
     border-radius: 8px;
   }
+  .nav-logo span { color: var(--primary); }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a {
     text-decoration: none;
@@ -134,7 +139,7 @@
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
     padding: 14px 28px;
     border-radius: 12px;
     font-size: 1em;
@@ -159,6 +164,10 @@
   .btn-outline:hover {
     border-color: var(--white);
     transform: translateY(-2px);
+  }
+  .btn img.store-badge {
+    height: 44px;
+    border-radius: 8px;
   }
 
   /* Section common */
@@ -190,156 +199,6 @@
     color: var(--text-muted);
     max-width: 600px;
     margin-bottom: 60px;
-  }
-
-  /* Screenshots - phone mockup grid */
-  .screenshots {
-    background: linear-gradient(180deg, var(--white) 0%, var(--surface) 100%);
-    text-align: center;
-  }
-  .screenshots .section-inner { text-align: left; }
-  .screenshots-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 32px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .phone-mockup {
-    text-align: center;
-    transition: transform 0.4s ease;
-  }
-  .phone-mockup:nth-child(2),
-  .phone-mockup:nth-child(4) {
-    transform: translateY(24px);
-  }
-  .phone-mockup:hover {
-    transform: translateY(-8px);
-  }
-  .phone-mockup:nth-child(2):hover,
-  .phone-mockup:nth-child(4):hover {
-    transform: translateY(16px);
-  }
-  .phone-frame {
-    position: relative;
-    background: #1a1a1a;
-    border-radius: 28px;
-    padding: 10px;
-    box-shadow:
-      0 4px 8px rgba(0,0,0,0.1),
-      0 16px 40px rgba(0,0,0,0.15),
-      inset 0 1px 0 rgba(255,255,255,0.1);
-  }
-  .phone-frame::before {
-    content: '';
-    position: absolute;
-    top: 6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40%;
-    height: 16px;
-    background: #1a1a1a;
-    border-radius: 0 0 12px 12px;
-    z-index: 2;
-  }
-  .phone-frame {
-    cursor: pointer;
-  }
-  .phone-frame img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 18px;
-  }
-
-  /* Lightbox */
-  .lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(8px);
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .lightbox.active {
-    display: flex;
-    opacity: 1;
-  }
-  .lightbox img {
-    max-height: 90vh;
-    max-width: 90vw;
-    border-radius: 24px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
-  }
-  .lightbox.active img {
-    transform: scale(1);
-  }
-  .lightbox-close {
-    position: absolute;
-    top: 24px;
-    right: 32px;
-    width: 44px;
-    height: 44px;
-    border: none;
-    background: rgba(255,255,255,0.15);
-    color: #fff;
-    font-size: 1.5em;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .lightbox-close:hover { background: rgba(255,255,255,0.3); }
-  .phone-mockup .caption {
-    margin-top: 16px;
-    font-size: 0.88em;
-    font-weight: 600;
-    color: var(--navy);
-    letter-spacing: -0.02em;
-  }
-
-  @media (max-width: 1024px) {
-    .screenshots-grid { gap: 20px; }
-    .phone-frame { border-radius: 22px; padding: 8px; }
-    .phone-frame img { border-radius: 14px; }
-  }
-  @media (max-width: 768px) {
-    .screenshots-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 500px;
-    }
-    .phone-mockup:nth-child(2),
-    .phone-mockup:nth-child(4) { transform: none; }
-    .phone-mockup:nth-child(2):hover,
-    .phone-mockup:nth-child(4):hover { transform: translateY(-8px); }
-    .phone-mockup:nth-child(4) { grid-column: 1 / 2; }
-    .phone-mockup:nth-child(5) { grid-column: 2 / 3; }
-  }
-  @media (max-width: 480px) {
-    .screenshots-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      max-width: 320px;
-    }
-    .phone-frame { border-radius: 18px; padding: 6px; }
-    .phone-frame::before { height: 12px; }
-    .phone-frame img { border-radius: 12px; }
-    .phone-mockup .caption { font-size: 0.8em; margin-top: 10px; }
-    .phone-mockup:nth-child(5) {
-      grid-column: 1 / -1;
-      max-width: 152px;
-      margin: 0 auto;
-    }
   }
 
   /* Features */
@@ -532,9 +391,11 @@
 <!-- Navigation -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="#" class="nav-logo"><img src="app_icon.png" alt="리클림" onerror="this.style.display='none'">리클림</a>
+    <a href="#" class="nav-logo">
+      <img src="../assets/images/app_icon.png" alt="리클림" onerror="this.style.display='none'">
+      리<span>클림</span>
+    </a>
     <ul class="nav-links">
-      <li><a href="#screenshots">앱 미리보기</a></li>
       <li><a href="#features">주요 기능</a></li>
       <li><a href="#how">이용 방법</a></li>
       <li><a href="#target">이런 분께</a></li>
@@ -553,40 +414,9 @@
       <a href="https://play.google.com/store/apps/details?id=com.mg.cling" class="btn btn-primary" target="_blank" rel="noopener">
         Google Play에서 다운로드
       </a>
-      <a href="https://apps.apple.com/us/app/%EB%A6%AC%ED%81%B4%EB%A6%BC/id6760994195" class="btn btn-outline" target="_blank" rel="noopener">
+      <a href="https://apps.apple.com/app/id6744227498" class="btn btn-outline" target="_blank" rel="noopener">
         App Store에서 다운로드
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- Screenshots -->
-<section class="screenshots" id="screenshots">
-  <div class="section-inner">
-    <div class="section-label">Preview</div>
-    <h2 class="section-title">앱 미리보기</h2>
-    <p class="section-desc">리클림의 주요 화면을 확인해보세요.</p>
-  </div>
-  <div class="screenshots-grid">
-    <div class="phone-mockup">
-      <div class="phone-frame"><img src="screenshots/home.png" alt="홈 화면"></div>
-      <div class="caption">홈 대시보드</div>
-    </div>
-    <div class="phone-mockup">
-      <div class="phone-frame"><img src="screenshots/camera.png" alt="촬영 화면"></div>
-      <div class="caption">영상 촬영</div>
-    </div>
-    <div class="phone-mockup">
-      <div class="phone-frame"><img src="screenshots/editor.png" alt="영상 편집"></div>
-      <div class="caption">영상 편집</div>
-    </div>
-    <div class="phone-mockup">
-      <div class="phone-frame"><img src="screenshots/gym.png" alt="암장 상세"></div>
-      <div class="caption">암장 상세</div>
-    </div>
-    <div class="phone-mockup">
-      <div class="phone-frame"><img src="screenshots/stats.png" alt="암장 통계"></div>
-      <div class="caption">암장 통계</div>
     </div>
   </div>
 </section>
@@ -689,7 +519,7 @@
     <a href="https://play.google.com/store/apps/details?id=com.mg.cling" class="btn btn-outline" target="_blank" rel="noopener">
       Google Play
     </a>
-    <a href="https://apps.apple.com/us/app/%EB%A6%AC%ED%81%B4%EB%A6%BC/id6760994195" class="btn btn-outline" target="_blank" rel="noopener">
+    <a href="https://apps.apple.com/app/id6744227498" class="btn btn-outline" target="_blank" rel="noopener">
       App Store
     </a>
   </div>
@@ -706,42 +536,11 @@
   </div>
 </footer>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" onclick="closeLightbox()">&#10005;</button>
-  <img id="lightboxImg" src="" alt="">
-</div>
-
 <script>
   // Navbar scroll effect
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 20);
-  });
-
-  // Lightbox
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-
-  document.querySelectorAll('.phone-frame').forEach(frame => {
-    frame.addEventListener('click', () => {
-      lightboxImg.src = frame.querySelector('img').src;
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  function closeLightbox() {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target !== lightboxImg) closeLightbox();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLightbox();
   });
 </script>
 </body>
