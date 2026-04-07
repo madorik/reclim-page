@@ -192,94 +192,45 @@
     margin-bottom: 60px;
   }
 
-  /* Screenshots carousel */
+  /* Screenshots grid */
   .screenshots { background: var(--white); }
-  .carousel {
-    position: relative;
-    max-width: 340px;
-    margin: 0 auto;
-  }
-  .carousel-viewport {
-    overflow: hidden;
-    border-radius: 24px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-  }
-  .carousel-track {
+  .screenshots-grid {
     display: flex;
-    transition: transform 0.4s ease;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: nowrap;
   }
-  .carousel-slide {
-    min-width: 100%;
+  .screenshot-item {
     text-align: center;
+    flex: 0 0 auto;
   }
-  .carousel-slide img {
-    width: 100%;
+  .screenshot-item img {
+    width: 180px;
     height: auto;
-    display: block;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    transition: transform 0.3s, box-shadow 0.3s;
   }
-  .carousel-caption {
-    margin-top: 16px;
-    font-size: 1em;
+  .screenshot-item img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  }
+  .screenshot-item .caption {
+    margin-top: 12px;
+    font-size: 0.85em;
     font-weight: 600;
     color: var(--text-muted);
-    text-align: center;
   }
-  .carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-70%);
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: none;
-    background: var(--white);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-    font-size: 1.3em;
-    cursor: pointer;
-    z-index: 2;
-    transition: background 0.2s, transform 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--navy);
+  @media (max-width: 1024px) {
+    .screenshot-item img { width: 150px; }
   }
-  .carousel-btn:hover {
-    background: var(--surface);
-    transform: translateY(-70%) scale(1.1);
-  }
-  .carousel-btn.prev { left: -60px; }
-  .carousel-btn.next { right: -60px; }
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 24px;
-  }
-  .carousel-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: none;
-    background: #ddd;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-    padding: 0;
-  }
-  .carousel-dot.active {
-    background: var(--primary);
-    transform: scale(1.2);
-  }
-
   @media (max-width: 768px) {
-    .carousel { max-width: 280px; }
-    .carousel-btn { width: 40px; height: 40px; font-size: 1.1em; }
-    .carousel-btn.prev { left: -48px; }
-    .carousel-btn.next { right: -48px; }
+    .screenshots-grid { flex-wrap: wrap; }
+    .screenshot-item img { width: 140px; }
   }
   @media (max-width: 480px) {
-    .carousel { max-width: 240px; }
-    .carousel-btn.prev { left: -44px; }
-    .carousel-btn.next { right: -44px; }
+    .screenshots-grid { gap: 12px; }
+    .screenshot-item img { width: 120px; border-radius: 14px; }
   }
 
   /* Features */
@@ -507,22 +458,27 @@
     <h2 class="section-title">앱 미리보기</h2>
     <p class="section-desc">리클림의 주요 화면을 확인해보세요.</p>
   </div>
-  <div class="carousel" id="carousel">
-    <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
-    <div class="carousel-viewport">
-      <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-slide" data-caption="홈 대시보드"><img src="screenshots/home.png" alt="홈 화면"></div>
-        <div class="carousel-slide" data-caption="영상 촬영"><img src="screenshots/camera.png" alt="촬영 화면"></div>
-        <div class="carousel-slide" data-caption="영상 편집"><img src="screenshots/editor.png" alt="영상 편집"></div>
-        <div class="carousel-slide" data-caption="완등 축하"><img src="screenshots/complete.png" alt="완등 축하"></div>
-        <div class="carousel-slide" data-caption="영상 비교"><img src="screenshots/compare.png" alt="영상 비교"></div>
-        <div class="carousel-slide" data-caption="암장 상세"><img src="screenshots/gym.png" alt="암장 상세"></div>
-        <div class="carousel-slide" data-caption="암장 통계"><img src="screenshots/stats.png" alt="암장 통계"></div>
-      </div>
+  <div class="screenshots-grid">
+    <div class="screenshot-item">
+      <img src="screenshots/home.png" alt="홈 화면">
+      <div class="caption">홈 대시보드</div>
     </div>
-    <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
-    <div class="carousel-caption" id="carouselCaption">홈 대시보드</div>
-    <div class="carousel-dots" id="carouselDots"></div>
+    <div class="screenshot-item">
+      <img src="screenshots/camera.png" alt="촬영 화면">
+      <div class="caption">영상 촬영</div>
+    </div>
+    <div class="screenshot-item">
+      <img src="screenshots/editor.png" alt="영상 편집">
+      <div class="caption">영상 편집</div>
+    </div>
+    <div class="screenshot-item">
+      <img src="screenshots/gym.png" alt="암장 상세">
+      <div class="caption">암장 상세</div>
+    </div>
+    <div class="screenshot-item">
+      <img src="screenshots/stats.png" alt="암장 통계">
+      <div class="caption">암장 통계</div>
+    </div>
   </div>
 </section>
 
@@ -648,47 +604,6 @@
     nav.classList.toggle('scrolled', window.scrollY > 20);
   });
 
-  // Carousel
-  const track = document.getElementById('carouselTrack');
-  const slides = track.querySelectorAll('.carousel-slide');
-  const caption = document.getElementById('carouselCaption');
-  const dotsContainer = document.getElementById('carouselDots');
-  let current = 0;
-
-  // Create dots
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-    dot.onclick = () => goToSlide(i);
-    dotsContainer.appendChild(dot);
-  });
-
-  function goToSlide(index) {
-    current = ((index % slides.length) + slides.length) % slides.length;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
-    caption.textContent = slides[current].dataset.caption;
-    dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
-      d.classList.toggle('active', i === current);
-    });
-  }
-
-  function moveSlide(dir) {
-    goToSlide(current + dir);
-  }
-
-  // Touch swipe support
-  let touchStartX = 0;
-  track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
-  track.addEventListener('touchend', (e) => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) moveSlide(diff > 0 ? 1 : -1);
-  });
-
-  // Keyboard support
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') moveSlide(-1);
-    if (e.key === 'ArrowRight') moveSlide(1);
-  });
 </script>
 </body>
 </html>
