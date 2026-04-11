@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>리클림 - 클라이밍 기록의 모든 것</title>
+<title>리클림 - 클라이밍 영상 기록부터 편집까지 한 번에!</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -67,13 +67,14 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
   }
   .nav-logo img {
     width: 32px;
     height: 32px;
     border-radius: 8px;
   }
+  .nav-logo span { color: var(--primary); }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a {
     text-decoration: none;
@@ -138,7 +139,7 @@
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
     padding: 14px 28px;
     border-radius: 12px;
     font-size: 1em;
@@ -163,6 +164,10 @@
   .btn-outline:hover {
     border-color: var(--white);
     transform: translateY(-2px);
+  }
+  .btn img.store-badge {
+    height: 44px;
+    border-radius: 8px;
   }
 
   /* Section common */
@@ -194,156 +199,6 @@
     color: var(--text-muted);
     max-width: 600px;
     margin-bottom: 60px;
-  }
-
-  /* Screenshots - phone mockup grid */
-  .screenshots {
-    background: linear-gradient(180deg, var(--white) 0%, var(--surface) 100%);
-    text-align: center;
-  }
-  .screenshots .section-inner { text-align: left; }
-  .screenshots-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 32px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .phone-mockup {
-    text-align: center;
-    transition: transform 0.4s ease;
-  }
-  .phone-mockup:nth-child(2),
-  .phone-mockup:nth-child(4) {
-    transform: translateY(24px);
-  }
-  .phone-mockup:hover {
-    transform: translateY(-8px);
-  }
-  .phone-mockup:nth-child(2):hover,
-  .phone-mockup:nth-child(4):hover {
-    transform: translateY(16px);
-  }
-  .phone-frame {
-    position: relative;
-    background: #1a1a1a;
-    border-radius: 28px;
-    padding: 10px;
-    box-shadow:
-      0 4px 8px rgba(0,0,0,0.1),
-      0 16px 40px rgba(0,0,0,0.15),
-      inset 0 1px 0 rgba(255,255,255,0.1);
-  }
-  .phone-frame::before {
-    content: '';
-    position: absolute;
-    top: 6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40%;
-    height: 16px;
-    background: #1a1a1a;
-    border-radius: 0 0 12px 12px;
-    z-index: 2;
-  }
-  .phone-frame {
-    cursor: pointer;
-  }
-  .phone-frame img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 18px;
-  }
-
-  /* Lightbox */
-  .lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(8px);
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .lightbox.active {
-    display: flex;
-    opacity: 1;
-  }
-  .lightbox img {
-    max-height: 90vh;
-    max-width: 90vw;
-    border-radius: 24px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
-  }
-  .lightbox.active img {
-    transform: scale(1);
-  }
-  .lightbox-close {
-    position: absolute;
-    top: 24px;
-    right: 32px;
-    width: 44px;
-    height: 44px;
-    border: none;
-    background: rgba(255,255,255,0.15);
-    color: #fff;
-    font-size: 1.5em;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .lightbox-close:hover { background: rgba(255,255,255,0.3); }
-  .phone-mockup .caption {
-    margin-top: 16px;
-    font-size: 0.88em;
-    font-weight: 600;
-    color: var(--navy);
-    letter-spacing: -0.02em;
-  }
-
-  @media (max-width: 1024px) {
-    .screenshots-grid { gap: 20px; }
-    .phone-frame { border-radius: 22px; padding: 8px; }
-    .phone-frame img { border-radius: 14px; }
-  }
-  @media (max-width: 768px) {
-    .screenshots-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 500px;
-    }
-    .phone-mockup:nth-child(2),
-    .phone-mockup:nth-child(4) { transform: none; }
-    .phone-mockup:nth-child(2):hover,
-    .phone-mockup:nth-child(4):hover { transform: translateY(-8px); }
-    .phone-mockup:nth-child(4) { grid-column: 1 / 2; }
-    .phone-mockup:nth-child(5) { grid-column: 2 / 3; }
-  }
-  @media (max-width: 480px) {
-    .screenshots-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      max-width: 320px;
-    }
-    .phone-frame { border-radius: 18px; padding: 6px; }
-    .phone-frame::before { height: 12px; }
-    .phone-frame img { border-radius: 12px; }
-    .phone-mockup .caption { font-size: 0.8em; margin-top: 10px; }
-    .phone-mockup:nth-child(5) {
-      grid-column: 1 / -1;
-      max-width: 152px;
-      margin: 0 auto;
-    }
   }
 
   /* Features */
@@ -536,9 +391,11 @@
 <!-- Navigation -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="#" class="nav-logo"><img src="app_icon.png" alt="리클림" onerror="this.style.display='none'">리클림</a>
+    <a href="#" class="nav-logo">
+      <img src="../assets/images/app_icon.png" alt="리클림" onerror="this.style.display='none'">
+      리<span>클림</span>
+    </a>
     <ul class="nav-links">
-      <li><a href="#screenshots">앱 미리보기</a></li>
       <li><a href="#features">주요 기능</a></li>
       <li><a href="#how">이용 방법</a></li>
       <li><a href="#target">이런 분께</a></li>
@@ -551,46 +408,15 @@
 <section class="hero">
   <div class="hero-content">
     <div class="hero-badge">Indoor Climbing Tracker</div>
-    <h1>클라이밍 기록의<br><span>모든 것</span>, 리클림</h1>
-    <p>영상 촬영부터 기록, 편집, 통계까지.<br>나의 클라이밍 여정을 한 곳에서 관리하세요.</p>
+    <h1>촬영하고, 편집하고,<br><span>기록까지 한 번에</span></h1>
+    <p>클라이밍 영상을 촬영하고 트림, 텍스트, 스티커까지<br>앱 하나로 편집 완료. 별도 편집 앱이 필요 없습니다.</p>
     <div class="hero-buttons">
       <a href="https://play.google.com/store/apps/details?id=com.mg.cling" class="btn btn-primary" target="_blank" rel="noopener">
         Google Play에서 다운로드
       </a>
-      <a href="https://apps.apple.com/us/app/%EB%A6%AC%ED%81%B4%EB%A6%BC/id6760994195" class="btn btn-outline" target="_blank" rel="noopener">
+      <a href="https://apps.apple.com/app/id6744227498" class="btn btn-outline" target="_blank" rel="noopener">
         App Store에서 다운로드
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- Screenshots -->
-<section class="screenshots" id="screenshots">
-  <div class="section-inner">
-    <div class="section-label">Preview</div>
-    <h2 class="section-title">앱 미리보기</h2>
-    <p class="section-desc">리클림의 주요 화면을 확인해보세요.</p>
-  </div>
-  <div class="screenshots-grid">
-    <div class="phone-mockup">
-      <div class="phone-frame"><img src="screenshots/home.png" alt="홈 화면"></div>
-      <div class="caption">홈 대시보드</div>
-    </div>
-    <div class="phone-mockup">
-      <div class="phone-frame"><img src="screenshots/camera.png" alt="촬영 화면"></div>
-      <div class="caption">영상 촬영</div>
-    </div>
-    <div class="phone-mockup">
-      <div class="phone-frame"><img src="screenshots/editor.png" alt="영상 편집"></div>
-      <div class="caption">영상 편집</div>
-    </div>
-    <div class="phone-mockup">
-      <div class="phone-frame"><img src="screenshots/gym.png" alt="암장 상세"></div>
-      <div class="caption">암장 상세</div>
-    </div>
-    <div class="phone-mockup">
-      <div class="phone-frame"><img src="screenshots/stats.png" alt="암장 통계"></div>
-      <div class="caption">암장 통계</div>
     </div>
   </div>
 </section>
@@ -599,13 +425,23 @@
 <section class="features" id="features">
   <div class="section-inner">
     <div class="section-label">Features</div>
-    <h2 class="section-title">리클림이 특별한 이유</h2>
-    <p class="section-desc">클라이머에게 필요한 기능만 모았습니다. 복잡한 건 빼고, 진짜 필요한 것만.</p>
+    <h2 class="section-title">촬영부터 편집까지, 올인원</h2>
+    <p class="section-desc">클라이밍 영상 찍고 따로 편집 앱 열지 마세요. 리클림 하나면 촬영, 편집, 기록이 한 번에 끝납니다.</p>
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon red">&#127909;</div>
-        <h3>영상 촬영 & 편집</h3>
-        <p>앱에서 바로 클라이밍 영상을 촬영하고, 필요한 구간만 트리밍하거나 속도를 조절해 저장하세요. 갤러리 영상 불러오기도 지원합니다.</p>
+        <h3>촬영 즉시 편집</h3>
+        <p>앱에서 바로 촬영하고, 촬영 직후 편집 화면으로 이어집니다. 갤러리 영상 불러오기도 가능. 별도 편집 앱 없이 리클림 안에서 모든 게 끝납니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon purple">&#9986;&#65039;</div>
+        <h3>트림 & 속도 조절</h3>
+        <p>긴 영상에서 핵심 등반 구간만 잘라내세요. 슬로우 모션, 배속 재생으로 무브를 세밀하게 분석하거나 하이라이트를 만들 수 있습니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon orange">&#127912;</div>
+        <h3>텍스트 & 스티커</h3>
+        <p>영상 위에 텍스트를 올려 등급, 날짜, 메모를 남기세요. 스티커로 완등 성공, 핵심 무브 등을 표시하면 나중에 돌아볼 때 한눈에 파악됩니다.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon blue">&#128221;</div>
@@ -618,17 +454,17 @@
         <p>날짜별로 클라이밍 기록을 한눈에 확인하세요. 어떤 날에 얼마나 등반했는지 직관적으로 파악할 수 있습니다.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon purple">&#128205;</div>
+        <div class="feature-icon teal">&#128205;</div>
         <h3>클라이밍장 관리</h3>
         <p>자주 가는 클라이밍장을 등록하고 지도에서 확인하세요. 기록마다 어떤 장소에서 등반했는지 남길 수 있습니다.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon orange">&#128200;</div>
+        <div class="feature-icon blue">&#128200;</div>
         <h3>통계 & 분석</h3>
         <p>등급별, 기간별 클라이밍 통계를 차트로 확인하세요. 나의 실력 변화를 한눈에 파악할 수 있습니다.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon teal">&#9729;&#65039;</div>
+        <div class="feature-icon green">&#9729;&#65039;</div>
         <h3>클라우드 백업</h3>
         <p>소중한 클라이밍 영상과 기록을 클라우드에 안전하게 백업하세요. 기기를 바꿔도 데이터가 유지됩니다.</p>
       </div>
@@ -641,11 +477,15 @@
   <div class="section-inner">
     <div class="section-label">How it works</div>
     <h2 class="section-title">간단한 사용법</h2>
-    <p class="section-desc">복잡한 설정 없이, 3단계로 시작하세요.</p>
+    <p class="section-desc">복잡한 설정 없이, 4단계로 시작하세요.</p>
     <div class="steps">
       <div class="step">
         <h3>촬영하기</h3>
         <p>클라이밍하는 모습을 앱에서 바로 촬영하거나, 갤러리에서 기존 영상을 불러오세요.</p>
+      </div>
+      <div class="step">
+        <h3>편집하기</h3>
+        <p>촬영 직후 트림, 속도 조절, 텍스트, 스티커를 바로 적용하세요. 별도 앱 필요 없이 리클림에서 완성됩니다.</p>
       </div>
       <div class="step">
         <h3>기록하기</h3>
@@ -687,13 +527,13 @@
 
 <!-- CTA -->
 <section class="cta">
-  <h2>지금 리클림을 시작하세요</h2>
-  <p>무료로 다운로드하고 첫 번째 클라이밍을 기록해 보세요.</p>
+  <h2>촬영, 편집, 기록을 한 번에</h2>
+  <p>지금 리클림을 다운로드하고 첫 번째 클라이밍 영상을 만들어 보세요.</p>
   <div class="hero-buttons">
     <a href="https://play.google.com/store/apps/details?id=com.mg.cling" class="btn btn-outline" target="_blank" rel="noopener">
       Google Play
     </a>
-    <a href="https://apps.apple.com/us/app/%EB%A6%AC%ED%81%B4%EB%A6%BC/id6760994195" class="btn btn-outline" target="_blank" rel="noopener">
+    <a href="https://apps.apple.com/app/id6744227498" class="btn btn-outline" target="_blank" rel="noopener">
       App Store
     </a>
   </div>
@@ -710,42 +550,11 @@
   </div>
 </footer>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" onclick="closeLightbox()">&#10005;</button>
-  <img id="lightboxImg" src="" alt="">
-</div>
-
 <script>
   // Navbar scroll effect
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 20);
-  });
-
-  // Lightbox
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-
-  document.querySelectorAll('.phone-frame').forEach(frame => {
-    frame.addEventListener('click', () => {
-      lightboxImg.src = frame.querySelector('img').src;
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  function closeLightbox() {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target !== lightboxImg) closeLightbox();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLightbox();
   });
 </script>
 </body>
