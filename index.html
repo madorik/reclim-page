@@ -24,14 +24,17 @@
 <meta property="og:description" content="촬영부터 편집, 기록, 공유까지. 클라이밍 전용 올인원 앱 리클림. 초광각 0.6x·암장 자동 인식·구간별 속도 조절 지원.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://madorik.github.io/reclim-page/">
-<meta property="og:image" content="https://madorik.github.io/reclim-page/apple-touch-icon.png">
+<meta property="og:image" content="https://madorik.github.io/reclim-page/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="리클림 - 클라이밍 영상 촬영부터 편집까지 앱 하나로">
 <meta property="og:locale" content="ko_KR">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="리클림 - 클라이밍 영상 촬영·편집·기록 올인원 앱">
 <meta name="twitter:description" content="촬영부터 편집, 기록, 공유까지. 클라이밍 전용 올인원 앱.">
-<meta name="twitter:image" content="https://madorik.github.io/reclim-page/apple-touch-icon.png">
+<meta name="twitter:image" content="https://madorik.github.io/reclim-page/og-image.png">
 
 <!-- JSON-LD: SoftwareApplication (AEO) -->
 <script type="application/ld+json">
@@ -200,13 +203,15 @@
     display: flex; align-items: center; justify-content: center;
     text-align: center;
     padding: 120px 24px 80px;
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, #0F3460 100%);
     color: var(--white); position: relative; overflow: hidden;
+    background:
+      linear-gradient(180deg, rgba(15,15,30,0.72) 0%, rgba(15,15,30,0.82) 60%, rgba(15,15,30,0.94) 100%),
+      url('../assets/images/bouldering_wall.png') center/cover no-repeat;
   }
   .hero::before {
     content: ''; position: absolute;
     top: -50%; right: -30%; width: 80%; height: 200%;
-    background: radial-gradient(ellipse, rgba(233,69,96,0.15) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(233,69,96,0.22) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero-content { position: relative; z-index: 1; max-width: 760px; }
