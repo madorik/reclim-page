@@ -206,7 +206,7 @@
     color: var(--white); position: relative; overflow: hidden;
     background:
       linear-gradient(180deg, rgba(15,15,30,0.72) 0%, rgba(15,15,30,0.82) 60%, rgba(15,15,30,0.94) 100%),
-      url('../assets/images/bouldering_wall.png') center/cover no-repeat;
+      url('./bouldering_wall.png') center/cover no-repeat;
   }
   .hero::before {
     content: ''; position: absolute;
@@ -244,53 +244,14 @@
   }
   .phone-screen {
     position: absolute; inset: 0;
-    background:
-      linear-gradient(180deg, rgba(233,69,96,0.25) 0%, rgba(15,52,96,0.35) 60%, rgba(26,26,46,0.65) 100%),
-      url('../assets/images/bouldering_wall.png') center/cover no-repeat;
-    display: flex; flex-direction: column;
-    justify-content: space-between;
-    padding: 60px 22px 30px;
-    color: #fff;
+    background: #fff;
+    overflow: hidden;
   }
-  .phone-screen .tag {
-    align-self: flex-start;
-    background: rgba(233,69,96,0.9);
-    color: #fff; font-size: 11px; font-weight: 700;
-    padding: 5px 10px; border-radius: 999px;
-    letter-spacing: 0.3px;
+  .phone-screen img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top center;
+    display: block;
   }
-  .phone-screen .title {
-    font-size: 22px; font-weight: 800; line-height: 1.3;
-    margin-top: 14px; text-shadow: 0 2px 12px rgba(0,0,0,0.6);
-  }
-  .phone-screen .meta {
-    display: flex; gap: 8px; flex-wrap: wrap;
-    margin-top: 14px;
-  }
-  .phone-screen .meta span {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 5px 10px; border-radius: 8px;
-    font-size: 11px; font-weight: 600;
-  }
-  .phone-screen .bottom-card {
-    background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 16px;
-    padding: 14px 16px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .phone-screen .bottom-card .rec {
-    width: 48px; height: 48px; border-radius: 50%;
-    background: #E94560;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px; box-shadow: 0 0 0 3px rgba(255,255,255,0.15);
-  }
-  .phone-screen .bottom-card .info { display: flex; flex-direction: column; }
-  .phone-screen .bottom-card .info strong { font-size: 13px; font-weight: 700; }
-  .phone-screen .bottom-card .info em { font-size: 11px; color: rgba(255,255,255,0.7); font-style: normal; margin-top: 2px; }
   .hero-content { max-width: 620px; }
   .hero-badge {
     display: inline-block;
@@ -554,7 +515,7 @@
 <nav id="navbar" aria-label="주요 메뉴">
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <img src="../assets/images/app_icon.png" alt="리클림 앱 아이콘" onerror="this.style.display='none'">
+      <img src="./app_icon.png" alt="리클림 앱 아이콘" onerror="this.style.display='none'">
       <span>리클림</span>
     </a>
     <ul class="nav-links">
@@ -591,25 +552,10 @@
         </a>
       </div>
     </div>
-    <div class="hero-visual" aria-hidden="true">
+    <div class="hero-visual">
       <div class="phone-mockup">
         <div class="phone-screen">
-          <div>
-            <span class="tag">REC · 0.6x 초광각</span>
-            <div class="title">오늘의<br>세션 기록</div>
-            <div class="meta">
-              <span>클라이밍파크 강남</span>
-              <span>V4 · 빨강</span>
-              <span>완등</span>
-            </div>
-          </div>
-          <div class="bottom-card">
-            <div class="rec">&#9673;</div>
-            <div class="info">
-              <strong>촬영 중</strong>
-              <em>자동 기록 · 암장 인식됨</em>
-            </div>
-          </div>
+          <img src="app-screenshot-record.png" alt="리클림 기록 편집 화면 - 완등 여부, 난이도 색상, 암장 정보 입력">
         </div>
       </div>
     </div>
